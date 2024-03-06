@@ -3,13 +3,18 @@ global _start
 section .data
 
 msg dq 0
-msg1 dq 0000
+msg1 dq 0
 msglen equ 1
+msg2 dq "."
+msg2len equ 1
 
 section .text
 _start:
+mov rax , 0 
+mov rbx , 0
 mov rdx , 0
-mov rax , 3
+
+mov rax , 66
 mov rbx , 7
 div rbx 
 push rdx
@@ -22,13 +27,21 @@ mov rsi , msg
 mov rdx , msglen
 syscall
 
+mov rax , 1
+mov rdi , 1
+mov rsi , msg2
+mov rdx , msg2len
+syscall
+
+
 pop rdx
 mov rax , rdx
-imul rax , 100
+mov rcx , 0
+mov rdx , 0
+imul rax , 10000
 idiv rax , rbx
 
-
-add rax , '0'
+add rax , '0000'
 mov qword [msg1] , rax
 mov rax , 1
 mov rdi , 1
