@@ -1,11 +1,12 @@
 global _start
 
+extern to_string
+extern console_output 
+extern newline 
+
 section .data
-	msg dq 0
-	msglen equ 1
 	point dq "."
 	pointlen equ 1
-	NEWLINE db 10
 	SYS_EXIT equ 60
 	EXIT_SUCCESS equ 0
 
@@ -15,7 +16,7 @@ _start:
 	mov rbx , 0
 	mov rdx , 0
 
-	mov rax , 55
+	mov rax , 66
 	mov rbx , 7
 	div rbx 
 	push rdx
