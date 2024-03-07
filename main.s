@@ -1,9 +1,5 @@
 global _start
 
-extern to_string
-extern console_output
-extern newline
-
 section .data
 	msg dq 0
 	msglen equ 1
@@ -49,10 +45,31 @@ doagain :
 	jl doagain
 	call newline
 	jmp exit
-	
-	
+		
 exit:
 	mov rax , SYS_EXIT
 	mov rdi , EXIT_SUCCESS
 	syscall
+	
+to_string:
+	add rax , '0'
+	mov qword [msg] , rax
+	ret
+	
+console_output:
+	mov rax , 1
+	mov rdi , 1
+	mov rsi , msg
+	mov rdx , 1
+	syscall
+	ret
+	
+newline:
+	mov rax , 1
+	mov rdi , 1
+	mov rsi , NEWLINE
+	mov rdx , 1
+	syscall
+	ret
+	
 	
