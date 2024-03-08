@@ -2,10 +2,10 @@
 
 global to_string
 global newline
-global console_output 
+global console_output
 
 section .data				; Data section.
-	msg 		dq 	0	
+	msg 		dq 	0
 	msglen 		equ 	1
 	NEWLINE 	db 	10
 
@@ -15,7 +15,7 @@ to_string:
 	add 	rax , '0'
 	mov 	qword [msg] , rax
 	ret
-	
+
 console_output:
 	; Output on console.
 	mov rax , 1
@@ -24,7 +24,7 @@ console_output:
 	mov rdx , 1
 	syscall
 	ret
-	
+
 newline:
 	; New line on console.
 	mov rax , 1
@@ -33,5 +33,3 @@ newline:
 	mov rdx , 1
 	syscall
 	ret
-
-	
