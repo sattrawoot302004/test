@@ -1,28 +1,33 @@
+;Main of program to division and output to console (decimal 4 digits).
 global _start
 
+; The function, to be call.
 extern to_string
 extern console_output 
 extern newline 
 
-section .data
-	point dq "."
-	pointlen equ 1
-	SYS_EXIT equ 60
-	EXIT_SUCCESS equ 0
+section .data					;Data section.
+	point 		dq 	"."
+	pointlen 	equ 	1
+	SYS_EXIT 	equ 	60
+	EXIT_SUCCESS 	equ 	0
 
-section .text
+section .text					;Code section.
 _start:
-	mov rax , 0 
+	; Start Program
+	mov rax , 0 	
 	mov rbx , 0
 	mov rdx , 0
-
+	
+	; Division part
 	mov rax , 66
 	mov rbx , 7
 	div rbx 
 	push rdx
 	call to_string
 	call console_output
-
+	
+	; Output point(".").
 	mov rax , 1
 	mov rdi , 1
 	mov rsi , point
@@ -30,8 +35,8 @@ _start:
 	syscall
 	
 	mov r10 ,0
-
-doagain : 
+doagain :
+	; Loop for output decimal 4 digits.
 	pop rdx
 	mov rax , rdx
 	mov rcx , 0
@@ -48,6 +53,7 @@ doagain :
 	jmp exit
 		
 exit:
+	; Exit program.
 	mov rax , SYS_EXIT
 	mov rdi , EXIT_SUCCESS
 	syscall
